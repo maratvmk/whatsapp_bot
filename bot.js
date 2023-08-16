@@ -13,9 +13,7 @@ const client = twilio(accountSid, authToken);
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-    console.log('health check');
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end();
+    res.status(200).send('OK');
 });
 
 app.post('/webhook', async (req, res) => {
