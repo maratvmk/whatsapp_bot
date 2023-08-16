@@ -1,14 +1,14 @@
 
+import dotenv from 'dotenv'
+dotenv.config();
+
 import twilio from 'twilio';
 import express from 'express';
 import bodyParser from 'body-parser';
 import { askChatGPT } from './gpt.js';
 
 const app = express();
-
-const accountSid = 'AC54d69d6f0f49f282855c2d7f52731188';
-const authToken = 'ed3ac27befc263776b9a2608e56c27ef';
-const client = twilio(accountSid, authToken);
+const client = twilio(process.env.ACCOUNT_SID, process.env.AUTH_TOKEN);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -17,7 +17,6 @@ app.get('/', (req, res) => {
 });
 
 app.post('/webhook', async (req, res) => {
-
     const userMessage = req.body.Body;
 
     const twiml = new twilio.twiml.MessagingResponse();

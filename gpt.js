@@ -1,13 +1,10 @@
 import axios from 'axios';
 
-const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
-const API_KEY = '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';
-
 export async function askChatGPT(question) {
     console.log('req', question);
     try {
         const response = await axios.post(
-            OPENAI_API_URL,
+            'https://api.openai.com/v1/chat/completions',
             {
                 model: "gpt-3.5-turbo",
                 messages: [
@@ -19,7 +16,7 @@ export async function askChatGPT(question) {
             },
             {
                 headers: {
-                    'Authorization': `Bearer ${API_KEY}`,
+                    'Authorization': `Bearer ${process.env.API_KEY}`,
                     'Content-Type': 'application/json'
                 }
             }
